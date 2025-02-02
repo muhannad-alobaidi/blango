@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from blog.forms import CommentForm
 import logging
+from django.views.decorators.cache import cache_page
 
 logger = logging.getLogger(__name__)
 
