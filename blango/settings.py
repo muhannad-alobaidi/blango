@@ -15,6 +15,7 @@ import os
 from configurations import Configuration
 from configurations import values
 import dj_database_url
+from datetime import timedelta
 
 
 class Dev(Configuration):
@@ -95,6 +96,7 @@ class Dev(Configuration):
             "rest_framework.authentication.BasicAuthentication",
             "rest_framework.authentication.SessionAuthentication",
             "rest_framework.authentication.TokenAuthentication",
+            "rest_framework_simplejwt.authentication.JWTAuthentication",
         ],
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticatedOrReadOnly"
@@ -115,7 +117,7 @@ class Dev(Configuration):
         "PAGE_SIZE": 100,
         "DEFAULT_FILTER_BACKENDS": [
             "django_filters.rest_framework.DjangoFilterBackend",
-                    "rest_framework.filters.OrderingFilter"
+            "rest_framework.filters.OrderingFilter",
         ],
 
     }
@@ -219,7 +221,12 @@ class Dev(Configuration):
             "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
             "Basic": {"type": "basic"},
         }
-    }                                                                                                                    
+    }     
+    
+    SIMPLE_JWT = {
+        "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+        "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    }                                                                                                               
 
 class Prod(Dev):
     DEBUG = False
