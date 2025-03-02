@@ -11,6 +11,9 @@ class Tag(models.Model):
 
   def _str_(self):
     return self.value
+  
+  class Meta:
+    ordering= ["value"]
 
 
 

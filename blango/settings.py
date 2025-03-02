@@ -46,9 +46,6 @@ class Dev(Configuration):
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     ACCOUNT_ACTIVATION_DAYS = 7
 
-
-
-
     # Application definition
 
     INSTALLED_APPS = [
@@ -70,7 +67,8 @@ class Dev(Configuration):
         "allauth.account", 
         "allauth.socialaccount", 
         "allauth.socialaccount.providers.google",
-        "drf_yasg"
+        "drf_yasg",
+        "django_filters",
     ]
 
     MIDDLEWARE = [
@@ -113,6 +111,13 @@ class Dev(Configuration):
             "user_sustained": "5000/day",
             "user_burst": "100/minute",
         },
+        "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+        "PAGE_SIZE": 100,
+        "DEFAULT_FILTER_BACKENDS": [
+            "django_filters.rest_framework.DjangoFilterBackend",
+                    "rest_framework.filters.OrderingFilter"
+        ],
+
     }
 
     TEMPLATES = [
